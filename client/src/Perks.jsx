@@ -1,8 +1,19 @@
-const Perks = ({ selected, onChange }) => {
+import PropTypes from 'prop-types';
+const Perks = ({selected, onChange}) => {
+  const handleCbClick = (e) => {
+    console.log(e.target.name);
+    const {checked, name} = e.target;
+    if(checked){
+      onChange([...selected, name]);
+    }else {
+      onChange([...selected.filter((selectedName)=> (selectedName !== name))]);
+    }
+  };
+
   return (
     <>
       <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer '>
-        <input type='checkbox' />
+        <input type='checkbox' checked={selected.includes('Wifi')} name={'Wifi'} onChange={handleCbClick}/>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           fill='none'
@@ -20,7 +31,7 @@ const Perks = ({ selected, onChange }) => {
         <span>Wifi</span>
       </label>
       <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer '>
-        <input type='checkbox' />
+        <input type='checkbox' checked={selected.includes('Parking')} name={'Parking'} onChange={handleCbClick}/>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           fill='none'
@@ -32,14 +43,13 @@ const Perks = ({ selected, onChange }) => {
           <path
             strokeLinecap='round'
             strokeLinejoin='round'
-            d='M8.25 18.75adiv
-div1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12'
+            d='M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12'
           />
         </svg>
         <span>Parking</span>
       </label>
       <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer '>
-        <input type='checkbox' />
+        <input type='checkbox' checked={selected.includes('TV')} name={'TV'} onChange={handleCbClick}/>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           fill='none'
@@ -57,7 +67,7 @@ div1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.
         <span>TV</span>
       </label>
       <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer '>
-        <input type='checkbox' />
+        <input type='checkbox' checked={selected.includes('Radio')} name={'Radio'} onChange={handleCbClick}/>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           fill='none'
@@ -76,7 +86,7 @@ div1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.
         <span>Radio</span>
       </label>
       <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer '>
-        <input type='checkbox' />
+        <input type='checkbox' checked={selected.includes('Private entrance')} name={'Private entrance'} onChange={handleCbClick}/>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           fill='none'
@@ -94,7 +104,7 @@ div1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.
         <span> Private entrance</span>
       </label>
       <label className='border p-4 flex rounded-2xl gap-2 items-center cursor-pointer '>
-        <input type='checkbox' />
+        <input type='checkbox' checked={selected.includes('Pet')} name={'Pet'} onChange={handleCbClick}/>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           fill='none'
@@ -114,5 +124,11 @@ div1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.
     </>
   );
 };
+
+Perks.propTypes = {
+  selected: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
 
 export default Perks;
